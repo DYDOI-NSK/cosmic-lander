@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,6 +20,12 @@ public class Lander : MonoBehaviour
 
     private Rigidbody2D landerRigidbody;
 
+    public event EventHandler OnBeforeForce;
+
+    public event EventHandler OnForceUp;
+    public event EventHandler OnForceLeft;
+    public event EventHandler OnForceRight;
+
     private void Awake()
     {
         landerRigidbody = GetComponent<Rigidbody2D>();
@@ -26,22 +33,24 @@ public class Lander : MonoBehaviour
 
     private void FixedUpdate()
     {
+        OnBeforeForce?.Invoke(this, EventArgs.Empty);
+
         if (Keyboard.current.upArrowKey.isPressed)
         {
             landerRigidbody.AddForce(settings.force * transform.up);
-            Debug.Log("key up pressed");
+            OnForceUp?.Invoke(this, EventArgs.Empty);
         }
 
         if (Keyboard.current.leftArrowKey.isPressed)
         {
             landerRigidbody.AddTorque(settings.rotationForce * settings.rotationLeftDirection);
-            Debug.Log("key left pressed");
+            OnForceLeft?.Invoke(this, EventArgs.Empty);
         }
 
         if (Keyboard.current.rightArrowKey.isPressed)
         {
             landerRigidbody.AddTorque(settings.rotationForce * settings.rotationRightDirection);
-            Debug.Log("key right pressed");
+            OnForceRight?.Invoke(this, EventArgs.Empty);
         }
     }
 

@@ -8,6 +8,8 @@ public class LanderSettings
     public float rotationForce = 5f;
     public float rotationRightDirection = -1;
     public float rotationLeftDirection = +1;
+    public float accesiblaLandingDegree = 0.75f;
+    public float accesiblaLandingVelocity = 4f;
 }
 
 public class Lander : MonoBehaviour
@@ -40,6 +42,27 @@ public class Lander : MonoBehaviour
         {
             landerRigidbody.AddTorque(settings.rotationForce * settings.rotationRightDirection);
             Debug.Log("key right pressed");
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!collision.gameObject.TryGetComponent(out LandingPad pad))
+        {
+            Debug.Log("CRASHED");
+            return;
+        }
+
+        float collisionDegree = Vector2.Dot(Vector2.up, transform.up);
+
+        if (collision.relativeVelocity.magnitude < settings.accesiblaLandingVelocity)
+        {
+            Debug.Log("correct speed");
+        }
+
+        if (collisionDegree >= settings.accesiblaLandingDegree)
+        {
+            Debug.Log("correct angle");
         }
     }
 }

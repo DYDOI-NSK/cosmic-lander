@@ -13,6 +13,7 @@ public class LanderSettings
     public float rotationLeftDirection = +1;
     public float accesiblaLandingDegree = 0.75f;
     public float accesiblaLandingVelocity = 4f;
+    public float kmhPerUnit = 5f;
 }
 
 public class Lander : MonoBehaviour
@@ -29,6 +30,7 @@ public class Lander : MonoBehaviour
     public event EventHandler OnForceUp;
     public event EventHandler OnForceLeft;
     public event EventHandler OnForceRight;
+    public event EventHandler OnFuelChanged;
 
     private void Awake()
     {
@@ -89,6 +91,7 @@ public class Lander : MonoBehaviour
         }
 
         fuelAmount -= settings.fuelConsuptionAmount;
+        OnFuelChanged?.Invoke(this, EventArgs.Empty);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -123,5 +126,10 @@ public class Lander : MonoBehaviour
 
         fuelAmount += fuel.GetFuelAmount();
         fuel.DestroySelf();
+        OnFuelChanged?.Invoke(this, EventArgs.Empty);
     }
+
+    public float FuelNormalized => Mathf.Clamp01(fuelAmount / settings.defaultFuelAmount);
+    public float SpeedKmh => landerRigidbody.linearVelocity.magnitude * settings.kmhPerUnit;
+    public float SafeSpeedKmh => settings.accesiblaLandingVelocity * settings.kmhPerUnit;
 }

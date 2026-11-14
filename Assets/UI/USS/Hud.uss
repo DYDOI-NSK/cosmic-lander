@@ -1,0 +1,112 @@
+.hud-root {
+    position: absolute;
+    left: 0; right: 0; top: 0; bottom: 0;
+}
+
+.hud-right {
+    position: absolute;
+    right: 28px;
+    top: 24px;
+    align-items: flex-end;
+}
+
+.fuel-bar {
+    width: 290px;
+    padding: 10px 14px 14px 14px;
+    flex-direction: column;
+}
+.fuel-bar__header { flex-direction: row; align-items: center; }
+.fuel-bar__icon {
+    width: 22px; height: 22px; margin-right: 8px;
+    background-image: url("../Sprites/Fuel.png");
+    -unity-background-image-tint-color: var(--c-accent);
+}
+.fuel-bar__title { flex-grow: 1; }
+.fuel-bar__value { font-size: 48px; color: var(--c-accent); }
+.fuel-bar__segments { flex-direction: row; margin-top: 8px; }
+.fuel-bar__segment {
+    flex-grow: 1; height: 16px; border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.12);
+}
+.fuel-bar__segment.is-on { background-color: var(--c-accent); }
+.fuel-bar__warning { display: none; margin-top: 8px; font-size: 32px; color: var(--c-danger); }
+
+.fuel-bar--low .fuel-bar__segment.is-on { background-color: var(--c-danger); }
+.fuel-bar--low .fuel-bar__value { color: var(--c-danger); }
+.fuel-bar--low .fuel-bar__icon { -unity-background-image-tint-color: var(--c-danger); }
+.fuel-bar--low .fuel-bar__warning { display: flex; }
+
+.speed-gauge {
+    width: 150px;
+    margin-top: 14px;
+    padding: 10px 12px 18px 12px;
+    flex-direction: column;
+    align-items: center;
+}
+.speed-gauge__reading { flex-direction: row; align-items: flex-end; }
+.speed-gauge__value { font-size: 64px; }
+.speed-gauge__unit { font-size: 32px; color: var(--c-muted); margin-left: 4px; }
+.speed-gauge__status { font-size: 32px; letter-spacing: 1px; margin-bottom: 14px; }
+.speed-gauge__body { flex-direction: row; }
+.speed-gauge__ticks { position: relative; width: 30px; height: 260px; }
+.speed-gauge__tick { position: absolute; right: 0; margin-bottom: -16px; color: var(--c-muted); font-size: 32px; }
+.speed-gauge__scale {
+    position: relative; width: 24px; height: 260px;
+    margin-left: 8px; margin-right: 22px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.08);
+}
+.speed-gauge__zones {
+    position: absolute; left: 0; right: 0; top: 0; bottom: 0;
+    border-radius: 8px; overflow: hidden;
+}
+.speed-gauge__zone { position: absolute; left: 0; right: 0; }
+.speed-gauge__zone--safe { background-color: rgba(62, 230, 193, 0.6); }
+.speed-gauge__zone--caution { background-color: rgba(255, 194, 61, 0.6); }
+.speed-gauge__zone--danger { background-color: rgba(255, 90, 95, 0.55); }
+.speed-gauge__pointer {
+    position: absolute; left: -7px; right: -7px; height: 5px;
+    margin-bottom: -2px; border-radius: 3px; background-color: white;
+}
+.speed-gauge__arrow { position: absolute; left: 34px; width: 11px; height: 16px; margin-bottom: -8px; }
+
+.speed--safe .speed-gauge__value, .speed--safe .speed-gauge__status { color: var(--c-safe); }
+.speed--caution .speed-gauge__value, .speed--caution .speed-gauge__status { color: var(--c-accent); }
+.speed--danger .speed-gauge__value, .speed--danger .speed-gauge__status { color: var(--c-danger); }
+
+.hud-left {
+    position: absolute;
+    left: 22px;
+    top: 18px; 
+}
+.hud-left__buttons { flex-direction: row; }
+
+.icon-button { width: 88px; height: 88px; align-items: center; justify-content: center; }
+.icon-button__face {
+    width: 76px; height: 76px;
+    align-items: center; justify-content: center;
+    background-color: var(--c-panel);
+    border-width: 2px; border-color: var(--c-border);
+    border-radius: 18px;
+}
+.icon-button__icon {
+    width: 34px; height: 34px;
+    -unity-background-image-tint-color: var(--c-text);
+}
+.icon-button:active .icon-button__face {
+    background-color: #15224A;
+    border-color: var(--c-accent);
+}
+.icon-button:active .icon-button__icon {
+    -unity-background-image-tint-color: var(--c-accent);
+}
+.icon-button--menu .icon-button__icon    { background-image: url("../Sprites/Menu.png"); }
+.icon-button--restart .icon-button__icon { background-image: url("../Sprites/Restart.png"); }
+
+.score-label { margin-top: 8px; margin-left: 6px; }  /* 14 от кнопок минус 6 нижней зоны нажатия, 28 от края */
+.score-label__value {
+    font-size: 64px;
+    color: white;
+    margin-top: -6px;          /* замена line-height: 0.9, в USS его нет */
+    text-shadow: 0 2px 0 rgba(0, 0, 0, 0.6);
+}

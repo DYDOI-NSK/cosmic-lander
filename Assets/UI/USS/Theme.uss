@@ -1,0 +1,28 @@
+:root, .hud-root {
+    --c-panel: rgba(10, 18, 40, 0.8);
+    --c-border: rgba(130, 170, 255, 0.4);
+    --c-text: #EAF1FF;
+    --c-muted: #A9BCE0;
+    --c-accent: #FFC23D;
+    --c-safe: #3EE6C1;
+    --c-danger: #FF7A7E;
+}
+
+.hud-root {
+    -unity-font-definition: url("../Fonts/BitPotionExt SDF.asset");
+    color: var(--c-text);
+    font-size: 32px;
+}
+
+.panel {
+    background-color: var(--c-panel);
+    border-width: 2px;
+    border-color: var(--c-border);
+    border-radius: 16px;
+}
+
+.label-muted {
+    color: var(--c-muted);
+    font-size: 32px;
+    letter-spacing: 2px;
+}

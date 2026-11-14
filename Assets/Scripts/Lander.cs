@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 [System.Serializable]
 public class LanderSettings
 {
+    public float defaultFuelAmount = 20f;
+    public float fuelConsuptionAmount = 0.05f;
     public float force = 20f;
     public float rotationForce = 5f;
     public float rotationRightDirection = -1;
@@ -20,6 +22,8 @@ public class Lander : MonoBehaviour
 
     private Rigidbody2D landerRigidbody;
 
+    private float fuelAmount;
+
     public event EventHandler OnBeforeForce;
 
     public event EventHandler OnForceUp;
@@ -29,11 +33,34 @@ public class Lander : MonoBehaviour
     private void Awake()
     {
         landerRigidbody = GetComponent<Rigidbody2D>();
+        fuelAmount = settings.defaultFuelAmount;
+    }
+
+    private bool MovementKeyPressed()
+    {
+        return Keyboard.current.upArrowKey.isPressed
+            | Keyboard.current.leftArrowKey.isPressed
+            | Keyboard.current.rightArrowKey.isPressed;
+    }
+
+    private bool FuelIsEmpty()
+    {
+        return fuelAmount < 0;
     }
 
     private void FixedUpdate()
     {
         OnBeforeForce?.Invoke(this, EventArgs.Empty);
+
+        if (MovementKeyPressed())
+        {
+            ConsumeFuel();
+        }
+
+        if (FuelIsEmpty())
+        {
+            return;
+        }
 
         if (Keyboard.current.upArrowKey.isPressed)
         {
@@ -52,6 +79,16 @@ public class Lander : MonoBehaviour
             landerRigidbody.AddTorque(settings.rotationForce * settings.rotationRightDirection);
             OnForceRight?.Invoke(this, EventArgs.Empty);
         }
+    }
+
+    private void ConsumeFuel()
+    {
+        if (FuelIsEmpty())
+        {
+            return;
+        }
+
+        fuelAmount -= settings.fuelConsuptionAmount;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -73,5 +110,18 @@ public class Lander : MonoBehaviour
         {
             Debug.Log("correct angle");
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        bool found = collision.gameObject.TryGetComponent(out Fuel fuel);
+
+        if (!found)
+        {
+            return;
+        }
+
+        fuelAmount += fuel.GetFuelAmount();
+        fuel.DestroySelf();
     }
 }

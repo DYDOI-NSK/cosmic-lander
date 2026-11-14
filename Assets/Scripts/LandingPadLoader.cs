@@ -1,19 +1,32 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class LandingPadLoader : MonoBehaviour
+public class LandingPadSpawnOptions : SpawnOptions
 {
-    [SerializeField]
-    private LandingPad landingPadPrefab;
+    public Vector3 scale;
+    public int scoreMultiplier;
+}
 
-    public void Init()
+public class LandingPadLoader : BaseEntityLoader<LandingPad, LandingPadSpawnOptions>
+{
+    protected override IEnumerable<LandingPadSpawnOptions> GetSpawnOptions()
     {
-        SpawnLandingPad(new Vector3(27, 4.2f, 0), new Vector3(0.6f, 0.6f, 0.6f), 2);
-        SpawnLandingPad(new Vector3(56, 10.75f, 0), new Vector3(0.3f, 0.6f, 0.6f), 5);
+        yield return new LandingPadSpawnOptions
+        {
+            position = new Vector3(27, 4.2f, 0),
+            scale = new Vector3(0.6f, 0.6f, 0.6f),
+            scoreMultiplier = 2,
+        };
+        yield return new LandingPadSpawnOptions
+        {
+            position = new Vector3(56, 10.75f, 0),
+            scale = new Vector3(0.3f, 0.6f, 0.6f),
+            scoreMultiplier = 5,
+        };
     }
 
-    private void SpawnLandingPad(Vector3 position, Vector3 scale, int scoreMultiplier)
+    protected override void Setup(LandingPad pad, LandingPadSpawnOptions options)
     {
-        LandingPad pad = Instantiate(landingPadPrefab, position, Quaternion.identity);
-        pad.Initialize(scale, scoreMultiplier);
+        pad.Initialize(options.scale, options.scoreMultiplier);
     }
 }

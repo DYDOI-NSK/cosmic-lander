@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelLoader
   landingPadLoader: {fileID: 1158707663}
+  fuelLoader: {fileID: 1608965749}
 --- !u!4 &77697230
 Transform:
   m_ObjectHideFlags: 0
@@ -1253,7 +1254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd0daa83a3ad6ae480bf5279ade7f49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LandingPadLoader
-  landingPadPrefab: {fileID: 3983158212559392930, guid: c9c41e712d676f85895236a2db4324f9, type: 3}
+  prefab: {fileID: 3983158212559392930, guid: c9c41e712d676f85895236a2db4324f9, type: 3}
 --- !u!4 &1158707664
 Transform:
   m_ObjectHideFlags: 0
@@ -1274,6 +1275,51 @@ ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 5626142120532356289, guid: 491bc9f68306cad40a65002e796205eb, type: 3}
   m_PrefabInstance: {fileID: 801079579}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1608965747
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1608965748}
+  - component: {fileID: 1608965749}
+  m_Layer: 0
+  m_Name: FuelLoader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1608965748
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1608965747}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 13.72567, y: 10.26644, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1608965749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1608965747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58b25ecedc62939e587ef67583194bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FuelLoader
+  prefab: {fileID: 6924240137911343455, guid: 385fc5f6ed07c5fd399c9f1643be1267, type: 3}
 --- !u!1 &1725657806
 GameObject:
   m_ObjectHideFlags: 0
@@ -1697,6 +1743,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Lander
   settings:
+    defaultFuelAmount: 20
+    fuelConsuptionAmount: 0.05
     force: 20
     rotationForce: 5
     rotationRightDirection: -1
@@ -1731,3 +1779,4 @@ SceneRoots:
   - {fileID: 436743938}
   - {fileID: 77697230}
   - {fileID: 1158707664}
+  - {fileID: 1608965748}

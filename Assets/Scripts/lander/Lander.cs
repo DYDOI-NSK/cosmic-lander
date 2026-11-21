@@ -15,6 +15,13 @@ public class LanderSettings
     public float accesiblaLandingVelocity = 4f;
 }
 
+public struct LandingData
+{
+    public LandingPad pad;
+    public float velocity;
+    public float angleDot;
+}
+
 public class Lander : MonoBehaviour
 {
     [SerializeField]
@@ -24,16 +31,29 @@ public class Lander : MonoBehaviour
 
     private float fuelAmount;
 
+    private bool hasTouchedDown;
+
+    public LanderSettings Settings => settings;
+
     public event EventHandler OnBeforeForce;
 
     public event EventHandler OnForceUp;
     public event EventHandler OnForceLeft;
     public event EventHandler OnForceRight;
 
+    public event Action<LandingData> OnLanded;
+    public event Action OnCrashed;
+    public event Action<float> OnCoinPicked;
+
     private void Awake()
     {
         landerRigidbody = GetComponent<Rigidbody2D>();
         fuelAmount = settings.defaultFuelAmount;
+    }
+
+    private void OnDisable()
+    {
+        OnBeforeForce?.Invoke(this, EventArgs.Empty);
     }
 
     private bool MovementKeyPressed()
@@ -83,7 +103,6 @@ public class Lander : MonoBehaviour
 
     private void ConsumeFuel()
     {
-        Debug.Log("Fuel amount " + fuelAmount);
         if (FuelIsEmpty())
         {
             return;
@@ -94,35 +113,42 @@ public class Lander : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collision.gameObject.TryGetComponent(out LandingPad pad))
+        if (hasTouchedDown)
         {
-            Debug.Log("CRASHED");
             return;
         }
 
-        float collisionDegree = Vector2.Dot(Vector2.up, transform.up);
+        hasTouchedDown = true;
 
-        if (collision.relativeVelocity.magnitude < settings.accesiblaLandingVelocity)
+        if (!collision.gameObject.TryGetComponent(out LandingPad pad))
         {
-            Debug.Log("correct speed");
+            OnCrashed?.Invoke();
+            return;
         }
 
-        if (collisionDegree >= settings.accesiblaLandingDegree)
-        {
-            Debug.Log("correct angle");
-        }
+        OnLanded?.Invoke(
+            new LandingData
+            {
+                pad = pad,
+                velocity = collision.relativeVelocity.magnitude,
+                angleDot = Vector2.Dot(Vector2.up, transform.up),
+            }
+        );
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        bool found = collision.gameObject.TryGetComponent(out Fuel fuel);
-
-        if (!found)
+        if (collision.gameObject.TryGetComponent(out Fuel fuel))
         {
+            fuelAmount += fuel.GetValue();
+            fuel.DestroySelf();
             return;
         }
 
-        fuelAmount += fuel.GetValue();
-        fuel.DestroySelf();
+        if (collision.gameObject.TryGetComponent(out Coin coin))
+        {
+            OnCoinPicked?.Invoke(coin.GetValue());
+            coin.DestroySelf();
+        }
     }
 }

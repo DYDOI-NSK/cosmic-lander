@@ -3,6 +3,9 @@ using UnityEngine;
 public class LevelLoader : MonoBehaviour
 {
     [SerializeField]
+    private Lander lander;
+
+    [SerializeField]
     private LandingPadLoader landingPadLoader;
 
     [SerializeField]
@@ -11,7 +14,9 @@ public class LevelLoader : MonoBehaviour
     [SerializeField]
     private CoinLoader coinLoader;
 
-    private void Start()
+    public Lander Lander => lander;
+
+    public void Load()
     {
         landingPadLoader.Init();
         fuelLoader.Init();

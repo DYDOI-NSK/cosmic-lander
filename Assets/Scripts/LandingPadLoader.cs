@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class LandingPadSpawnOptions : SpawnOptions
 {
     public Vector3 scale;
@@ -9,21 +11,24 @@ public class LandingPadSpawnOptions : SpawnOptions
 
 public class LandingPadLoader : BaseEntityLoader<LandingPad, LandingPadSpawnOptions>
 {
-    protected override IEnumerable<LandingPadSpawnOptions> GetSpawnOptions()
+    [SerializeField]
+    private List<LandingPadSpawnOptions> spawnOptions = new()
     {
-        yield return new LandingPadSpawnOptions
+        new LandingPadSpawnOptions
         {
             position = new Vector3(27, 4.2f, 0),
             scale = new Vector3(0.6f, 0.6f, 0.6f),
             scoreMultiplier = 2,
-        };
-        yield return new LandingPadSpawnOptions
+        },
+        new LandingPadSpawnOptions
         {
             position = new Vector3(56, 10.75f, 0),
             scale = new Vector3(0.3f, 0.6f, 0.6f),
             scoreMultiplier = 5,
-        };
-    }
+        },
+    };
+
+    protected override IEnumerable<LandingPadSpawnOptions> GetSpawnOptions() => spawnOptions;
 
     protected override void Setup(LandingPad pad, LandingPadSpawnOptions options)
     {

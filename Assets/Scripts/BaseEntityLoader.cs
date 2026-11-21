@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public abstract class SpawnOptions
 {
     public Vector3 position;

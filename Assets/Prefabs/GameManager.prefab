@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   levelScenes:
+  - Level1
   - SampleScene
   scoreSettings:
     maxAngleScore: 100

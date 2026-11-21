@@ -83,6 +83,7 @@ public class Lander : MonoBehaviour
 
     private void ConsumeFuel()
     {
+        Debug.Log("Fuel amount " + fuelAmount);
         if (FuelIsEmpty())
         {
             return;
@@ -121,7 +122,7 @@ public class Lander : MonoBehaviour
             return;
         }
 
-        fuelAmount += fuel.GetFuelAmount();
+        fuelAmount += fuel.GetValue();
         fuel.DestroySelf();
     }
 }

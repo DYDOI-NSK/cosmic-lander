@@ -14,40 +14,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentVersion: 1.00
   subtype: lunarLanderFree
-  lastShownTimestamp: 1794634007
+  lastShownTimestamp: 1795240482
   lastUpdateResponse:
     version: 1.00
     versionUrl: https://unitycodemonkey.com
-  checkedLastUpdateTimestamp: 1794634007
+  checkedLastUpdateTimestamp: 1795240482
   lastQOTDResponse:
-    questionId: 353
-    questionText: 'Does this variable get reset when you load a different Scene?
+    questionId: 364
+    questionText: 'What is the Color on the SpriteRenderer after running this code?
 
-      <p>private static int score;</p>'
-    answerA: Yes
-    answerB: No
-    answerC: Only when loading the Main Menu
+      <p>Color myColor = Color.red;</p>
+
+      <p>spriteRenderer.color = myColor;</p>
+
+      <p>myColor = Color.blue;</p>'
+    answerA: Red
+    answerB: Blue
+    answerC: Don't Know
     answerD: 
     answerE: 
-  lastQotdTimestamp: 1794634007
+  lastQotdTimestamp: 1795240482
   lastDynamicHeaderResponse:
-    topImageUrl: https://codemonkeyexternal.blob.core.windows.net/external/Misc/humbleSep26Synty.png
-    topText: AWESOME Synty Asset with THOUSANDS of great assets!
-    topLink: humblebundle
-    bottomText: My 10+ Years of C# Knowledge in 1 Course!
-    bottomLink: csharpcourse
-  lastDynamicHeaderTimestamp: 1794634007
+    topImageUrl: https://codemonkeyexternal.blob.core.windows.net/external/Misc/codeMonkeyEndOfSummerBundleOct26.png
+    topText: Back for a limited time until the END OF SUMMER, 80% OFF all my Courses and Games!
+    topLink: summerbundle
+    bottomText: FREE Game Dev Insights every week straight to your inbox!
+    bottomLink: gamedevreport
+  lastDynamicHeaderTimestamp: 1795240482
   websiteLatestMessage:
     text: <a href="https://cmonkey.co/freecourses">Check out all my FREE courses! Click here!</a>
-  websiteLatestMessageTimestamp: 1794634007
+  websiteLatestMessageTimestamp: 1795240482
   websiteLatestVideos:
     videos:
-    - youTubeId: qjNGL4qQvrQ
-      title: TOP 10 FREE NEW Assets OCTOBER 2026!
-    - youTubeId: HD1wNUTZ0_Y
-      title: Sell 25,000 copies in 24 HOURS? Steam's Update EXPLAINED!
-    - youTubeId: OzldphY8pTs
-      title: THIS is why your game looks TERRIBLE!
-    - youTubeId: o4WEUv31JOc
-      title: If your code is HORRIBLE watch this!
-  websiteLatestVideosTimestamp: 1794634007
+    - youTubeId: Um0NY3AYAcY
+      title: TOP 10 FREE NEW Assets NOVEMBER 2026!
+    - youTubeId: nhx0FqRDSjM
+      title: 2027 will be the BEST year for Unity! (and $500,000 for indie devs!)
+    - youTubeId: ZXANmGW_D20
+      title: How to Publish your Game on Steam! (FREE Course)
+    - youTubeId: WhWutMiW1lI
+      title: My 10th Steam game is out! Why am I both HAPPY and SAD?
+  websiteLatestVideosTimestamp: 1795240482

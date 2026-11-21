@@ -150,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelLoader
   landingPadLoader: {fileID: 1158707663}
   fuelLoader: {fileID: 1608965749}
+  coinLoader: {fileID: 1138943854}
 --- !u!4 &77697230
 Transform:
   m_ObjectHideFlags: 0
@@ -1225,6 +1226,51 @@ PolygonCollider2D:
       - {x: -9.395722, y: -0.17942628}
       - {x: -9.444046, y: 0.13578033}
   m_UseDelaunayMesh: 1
+--- !u!1 &1138943853
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1138943855}
+  - component: {fileID: 1138943854}
+  m_Layer: 0
+  m_Name: CoinLoader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1138943854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138943853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84bc58e1314207ffe9faa2a72663410a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CoinLoader
+  prefab: {fileID: 4230261327743793781, guid: 6c58d313b843a2f65920798b93b939ee, type: 3}
+--- !u!4 &1138943855
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138943853}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 13.90648, y: 5.21079, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1158707662
 GameObject:
   m_ObjectHideFlags: 0
@@ -1780,3 +1826,4 @@ SceneRoots:
   - {fileID: 77697230}
   - {fileID: 1158707664}
   - {fileID: 1608965748}
+  - {fileID: 1138943855}
